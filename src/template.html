@@ -3,14 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Title</title>
+    <title>Image Carousel</title>
   </head>
   <body>
     <header>
-      <h1>Project Title</h1>
+      <h1>Image Carousel</h1>
     </header>
 
-    <main></main>
+    <main>
+      <div class="slide-container">
+        <ul class="slides">
+          <li class="slide previous" id="previous-slide">
+            <img width="480" height="270" src="./images/image1.jpg" />
+          </li>
+          <li class="slide current" id="current-slide">
+            <img width="480" height="270" src="./images/image2.jpg" />
+          </li>
+          <li class="slide next" id="next-slide">
+            <img width="480" height="270" src="./images/image3.jpg" />
+          </li>
+        </ul>
+
+        <div class="slide-buttons">
+          <button type="button" id="btn-left">Left</button>
+          <button type="button" id="btn-right">Right</button>
+        </div>
+      </div>
+    </main>
 
     <footer>
       <span>

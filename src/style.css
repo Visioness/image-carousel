@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.slide-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.slide-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.slide-buttons button {
+  width: 100px;
+}
+
+.slides {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.slide {
+  border: 4px solid black;
+  border-radius: 20px;
+}
+
+.slide > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  display: block;
+}
+
+.slide.current,
+.slide.previous,
+.slide.next {
+  position: relative;
+  aspect-ratio: 16/9;
+  width: 30%;
+}
+
+.slide.current {
+  width: 50%;
+  z-index: 1000;
+}
+
+.slide.previous {
+  right: -100px;
+}
+
+.slide.next {
+  left: -100px;
+}
