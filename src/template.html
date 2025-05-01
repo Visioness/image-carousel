@@ -11,23 +11,34 @@
     </header>
 
     <main>
+      <div class="empty-container"></div>
+
       <div class="slide-container">
         <ul class="slides">
-          <li class="slide previous" id="previous-slide">
+          <li class="slide" id="slide-1">
             <img width="480" height="270" src="./images/image1.jpg" />
           </li>
-          <li class="slide current" id="current-slide">
+          <li class="slide" id="slide-2">
             <img width="480" height="270" src="./images/image2.jpg" />
           </li>
-          <li class="slide next" id="next-slide">
+          <li class="slide" id="slide-3">
             <img width="480" height="270" src="./images/image3.jpg" />
+          </li>
+          <li class="slide" id="slide-4">
+            <img width="480" height="270" src="./images/image4.jpg" />
+          </li>
+          <li class="slide" id="slide-5">
+            <img width="480" height="270" src="./images/image5.jpg" />
+          </li>
+          <li class="slide" id="slide-6">
+            <img width="480" height="270" src="./images/image6.jpg" />
           </li>
         </ul>
 
-        <div class="slide-buttons">
-          <button type="button" id="btn-left">Left</button>
-          <button type="button" id="btn-right">Right</button>
-        </div>
+        <button type="button" class="button" id="btn-right">❯</button>
+        <button type="button" class="button" id="btn-left">❮</button>
+
+        <div class="dots"></div>
       </div>
     </main>
 

@@ -1,42 +1,63 @@
-import image1 from './images/image1.jpg';
-import image2 from './images/image2.jpg';
-import image3 from './images/image3.jpg';
-import image4 from './images/image4.jpg';
-import image5 from './images/image5.jpg';
-import image6 from './images/image6.jpg';
-
-const images = [image1, image2, image3, image4, image5, image6];
-const MAX_IMAGES = images.length;
+const slides = Array.from(document.querySelectorAll('.slide'));
+const previousButton = document.querySelector('#btn-left');
+const nextButton = document.querySelector('#btn-right');
+const dotsContainer = document.querySelector('.dots');
 let currentIndex = 0;
 
-const buttonLeft = document.querySelector('#btn-left');
-const buttonRight = document.querySelector('#btn-right');
-const previousSlide = document.querySelector('.slide.previous');
-const nextSlide = document.querySelector('.slide.next');
-const currentSlide = document.querySelector('.slide.current');
-
-function getImage(index) {
-  if (index < 0) return images[MAX_IMAGES + index];
-  if (index >= MAX_IMAGES) return images[index % MAX_IMAGES];
-  return images[index];
+function createDots() {
+  dotsContainer.innerHTML = '';
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    dot.dataset.index = i;
+    if (i === currentIndex) dot.classList.add('active');
+    dotsContainer.appendChild(dot);
+  });
 }
 
-function setupCarousel() {
-  previousSlide.querySelector('img').src = getImage(currentIndex - 1);
-  currentSlide.querySelector('img').src = getImage(currentIndex);
-  nextSlide.querySelector('img').src = getImage(currentIndex + 1);
+function updateSlides() {
+  slides.forEach((slide, i) => {
+    slide.className = 'slide';
+    if (i === currentIndex) {
+      slide.classList.add('active');
+    } else if (i === (currentIndex - 1 + slides.length) % slides.length) {
+      slide.classList.add('previous');
+    } else if (i === (currentIndex + 1) % slides.length) {
+      slide.classList.add('next');
+    }
+
+    dotsContainer.querySelector('.dot.active').classList.remove('active');
+    dotsContainer
+      .querySelector(`.dot[data-index='${currentIndex}']`)
+      .classList.add('active');
+  });
 }
 
-setupCarousel();
+function getNextSlide() {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateSlides();
+}
 
-buttonLeft.addEventListener('click', () => {
-  currentIndex -= 1;
-  if (currentIndex < 0) currentIndex = MAX_IMAGES - 1;
-  setupCarousel();
+function getPreviousSlide() {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  updateSlides();
+}
+
+previousButton.addEventListener('click', () => {
+  getPreviousSlide();
 });
 
-buttonRight.addEventListener('click', () => {
-  currentIndex += 1;
-  if (currentIndex >= MAX_IMAGES) currentIndex = 0;
-  setupCarousel();
+nextButton.addEventListener('click', () => {
+  getNextSlide();
 });
+
+dotsContainer.addEventListener('click', (event) => {
+  if (event.target.classList.contains('dot')) {
+    currentIndex = parseInt(event.target.dataset.index);
+    updateSlides();
+  }
+});
+
+createDots();
+updateSlides();
+setInterval(getNextSlide, 5000);

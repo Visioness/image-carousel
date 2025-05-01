@@ -6,60 +6,124 @@
   box-sizing: border-box;
 }
 
+.empty-container {
+  width: 100%;
+  height: 200px;
+}
+
 .slide-container {
+  position: relative;
   display: flex;
+  width: 100vw;
+  /* overflow: hidden; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-}
-
-.slide-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.slide-buttons button {
-  width: 100px;
+  perspective: 1000px;
+  gap: 12px;
+  background-color: rgba(9, 9, 15, 0.986);
+  padding: 10px 0;
 }
 
 .slides {
   list-style-type: none;
-  display: flex;
-  align-items: center;
+  position: relative;
+  min-height: 450px;
+  width: 100%;
 }
 
 .slide {
-  border: 4px solid black;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  opacity: 0;
+  transform-origin: center center;
+  transform: translateX(-50%) scale(0.5);
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    opacity 0.5s ease;
+  z-index: 0;
   border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(202, 181, 226, 0.2);
 }
 
 .slide > img {
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
   display: block;
+  width: 800px;
+  height: 450px;
+  border-radius: 20px;
 }
 
-.slide.current,
-.slide.previous,
-.slide.next {
-  position: relative;
-  aspect-ratio: 16/9;
-  width: 30%;
-}
-
-.slide.current {
-  width: 50%;
-  z-index: 1000;
+.slide.active {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  z-index: 2;
+  box-shadow: 0 8px 24px rgba(202, 181, 226, 0.3);
 }
 
 .slide.previous {
-  right: -100px;
+  opacity: 1;
+  transform: translateX(-80%) scale(0.8);
+  z-index: 1;
 }
 
 .slide.next {
-  left: -100px;
+  opacity: 1;
+  transform: translateX(-20%) scale(0.8);
+  z-index: 1;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgb(165, 151, 189);
+  transition:
+    transform 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
+}
+
+.dot.active {
+  transform: scale(1.2);
+  background-color: rgb(101, 85, 238);
+}
+
+.button {
+  position: absolute;
+  width: 40px;
+  height: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  opacity: 0.6;
+  z-index: 3;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+#btn-left {
+  left: 0;
+  border-radius: 0 20px 20px 0;
+  border-left: none;
+}
+
+#btn-right {
+  right: 0;
+  border-radius: 20px 0 0 20px;
+  border-right: none;
 }
